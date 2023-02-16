@@ -3,7 +3,7 @@
 This repository is intended to share code I create.
 
 
-
+Code contained in this repository is under the GNU General Public License v3.0
 
 
 
