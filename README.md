@@ -1,3 +1,3 @@
 # lazeralien.github.io
 
-Welcome.
+This repository is intended to share code I create.
