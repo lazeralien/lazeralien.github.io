@@ -4,55 +4,104 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Together We Make Noise</title>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        background-color: #f0f0f0;
+    }
+
+    .container {
+        max-width: 600px;
+        margin: 0 auto;
+        padding: 20px;
+        background-color: #fff;
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2 {
+        text-align: center;
+        color: #333;
+    }
+
+    .button-container {
+        display: flex;
+        justify-content: center;
+        margin-top: 20px;
+    }
+
+    button {
+        padding: 10px 20px;
+        margin: 0 10px;
+        border: none;
+        background-color: #007bff;
+        color: #fff;
+        font-size: 16px;
+        cursor: pointer;
+        border-radius: 5px;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #0056b3;
+    }
+
+    .audio-container {
+        text-align: center;
+        margin-top: 20px;
+    }
+</style>
 </head>
 <body>
 
-<h2>City or Nature?</h2>
+<div class="container">
+    <h2>City or Nature?</h2>
 
-<button onclick="playRandomAudio()">City</button>
-<button onclick="playRandomAudio()">Nature</button>
+    <div class="button-container">
+        <button onclick="playRandomAudio(0)">City</button>
+        <button onclick="playRandomAudio(1)">Nature</button>
+    </div>
 
-<script>
-function playRandomAudio() {
-    // Define an array of audio file URLs for each button
-    var audioFiles = [
-        [
-          "choice1/city-road-at-night-ambiance-1-139173.mp3",
-          "choice1/distant-ambulance-siren-6108.mp3",
-          "choice1/street-ambience-9269.mp3",
-          "choice1/train-sleepers-train-wheels-freight-train-11683.mp3",
+    <div class="audio-container">
+        <!-- Audio player will be appended here -->
+    </div>
 
-        ],
-        [
-          "choice2/asian-night-sounds-1-78237.mp3", 
-          "choice2/calm-river-ambience-loop-125071.mp3", 
-          "choice2/cardinal-37075.mp3",
-          "choice2/stream-river-water-up-close-6061.mp3",
+    <script>
+    function playRandomAudio(buttonIndex) {
+        var audioFiles = [
+            [
+                "choice1/city-road-at-night-ambiance-1-139173.mp3",
+                "choice1/distant-ambulance-siren-6108.mp3",
+                "choice1/street-ambience-9269.mp3",
+                "choice1/train-sleepers-train-wheels-freight-train-11683.mp3",
+            ],
+            [
+                "choice2/asian-night-sounds-1-78237.mp3", 
+                "choice2/calm-river-ambience-loop-125071.mp3", 
+                "choice2/cardinal-37075.mp3",
+                "choice2/stream-river-water-up-close-6061.mp3",
+            ]
+        ];
 
-        ]
-    ];
+        var randomIndex = Math.floor(Math.random() * audioFiles[buttonIndex].length);
+        var randomAudioFile = audioFiles[buttonIndex][randomIndex];
 
-    // Get the index of the button that was clicked
-    var buttonIndex = Array.from(document.querySelectorAll('button')).indexOf(event.target);
+        var existingAudioPlayers = document.querySelectorAll('audio');
+        existingAudioPlayers.forEach(function(player) {
+            player.parentNode.removeChild(player);
+        });
 
-    // Select a random audio file from the corresponding array
-    var randomIndex = Math.floor(Math.random() * audioFiles[buttonIndex].length);
-    var randomAudioFile = audioFiles[buttonIndex][randomIndex];
+        var audio = new Audio(randomAudioFile);
+        audio.controls = true;
+        audio.autoplay = true;
+        audio.loop = true;
 
-    // Remove any existing audio players
-    var existingAudioPlayers = document.querySelectorAll('audio');
-    existingAudioPlayers.forEach(function(player) {
-        player.parentNode.removeChild(player);
-    });
+        document.querySelector('.audio-container').appendChild(audio);
+    }
+    </script>
+</div>
 
-    // Create a new audio player with the selected audio file
-    var audio = new Audio(randomAudioFile);
-    audio.controls = true;
-    audio.autoplay = true;
-    audio.loop = true;
-
-    document.body.appendChild(audio);
-}
-</script>
 </body>
 </html>
