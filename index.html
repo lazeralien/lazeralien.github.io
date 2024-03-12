@@ -1,46 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-
-  <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-9Q4SZ29DVT"></script>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag(){dataLayer.push(arguments);}
-  gtag('js', new Date());
-
-  gtag('config', 'G-9Q4SZ29DVT');
-</script>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Together We Make Noise</title>
 </head>
 <body>
 
+<h2>City or Nature?</h2>
+
+<button onclick="playRandomAudio()">City</button>
+<button onclick="playRandomAudio()">Nature</button>
+
 <script>
-window.onload = function() {
-    // Define an array of audio file URLs
+function playRandomAudio() {
+    // Define an array of audio file URLs for each button
     var audioFiles = [
-        "audio/20170714-071458-vietnamese_group_of_women_speaking_all_at_the_same_time-30535.mp3",
-        "audio/fighting-while-driving-in-nyc-28566.mp3",
-        "audio/kids-fighting-6774.mp3",
-        // Add more audio files as needed
+        [
+          "choice1/city-road-at-night-ambiance-1-139173.mp3",
+          "choice1/distant-ambulance-siren-6108.mp3",
+          "choice1/street-ambience-9269.mp3",
+          "choice1/train-sleepers-train-wheels-freight-train-11683.mp3",
+
+        ],
+        [
+          "choice2/asian-night-sounds-1-78237.mp3", 
+          "choice2/calm-river-ambience-loop-125071.mp3", 
+          "choice2/cardinal-37075.mp3",
+          "choice2/stream-river-water-up-close-6061.mp3",
+
+        ]
     ];
 
-    // Select a random audio file from the array
-    var randomIndex = Math.floor(Math.random() * audioFiles.length);
-    var randomAudioFile = audioFiles[randomIndex];
+    // Get the index of the button that was clicked
+    var buttonIndex = Array.from(document.querySelectorAll('button')).indexOf(event.target);
 
-    // Create an Audio object with the selected audio file
+    // Select a random audio file from the corresponding array
+    var randomIndex = Math.floor(Math.random() * audioFiles[buttonIndex].length);
+    var randomAudioFile = audioFiles[buttonIndex][randomIndex];
+
+    // Remove any existing audio players
+    var existingAudioPlayers = document.querySelectorAll('audio');
+    existingAudioPlayers.forEach(function(player) {
+        player.parentNode.removeChild(player);
+    });
+
+    // Create a new audio player with the selected audio file
     var audio = new Audio(randomAudioFile);
     audio.controls = true;
     audio.autoplay = true;
     audio.loop = true;
 
     document.body.appendChild(audio);
-};
+}
 </script>
-
+<h4>Don't like your sound? Refresh page to play something else</h4>
 </body>
 </html>
