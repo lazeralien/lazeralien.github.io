@@ -1,3 +1,3 @@
 # My sandbox for web applications.
 
-Credit to pixabay for audio sounds
+Credit to pixabay and FL Studio for audio sounds
