@@ -36,7 +36,7 @@
         padding: 10px 20px;
         margin: 0 10px;
         border: none;
-        background-color: #007bff;
+        background-color: #015bbb;
         color: #fff;
         font-size: 16px;
         cursor: pointer;
@@ -44,8 +44,9 @@
         transition: background-color 0.3s ease;
     }
 
-    button:hover {
-        background-color: #0056b3;
+    button.active {
+        background-color: #60a0e4;
+        border-width: 2px;
     }
 
     .audio-container {
@@ -60,8 +61,8 @@
     <h2>What is your element?</h2>
 
     <div class="button-container">
-        <button onclick="playRandomAudio(0)">City</button>
-        <button onclick="playRandomAudio(1)">Nature</button>
+        <button id="cityButton" onclick="playRandomAudio(0)">City</button>
+        <button id="natureButton" onclick="playRandomAudio(1)">Nature</button>
     </div>
 
     <div class="audio-container">
@@ -89,7 +90,7 @@
                 "choice2/DJ TwiZzy - Seagull Atmos.mp3",
                 "choice2/DJ TwiZzy - Waves Atmos.wav",
                 "choice2/stream-river-water-up-close-6061.mp3",
-                "choice2/night-soundscape-fx_84bpm_A#_minor.wav",
+                "choice2/night-soundscape_minor.wav",
             ]
         ];
 
@@ -107,6 +108,25 @@
         audio.loop = true;
 
         document.querySelector('.audio-container').appendChild(audio);
+
+        // Toggle button labels
+        var cityButton = document.getElementById('cityButton');
+        var natureButton = document.getElementById('natureButton');
+
+        if (buttonIndex === 0) {
+            cityButton.textContent = "New City Sound";
+            natureButton.textContent = "Nature";
+        } else {
+            cityButton.textContent = "City";
+            natureButton.textContent = "New Nature Sound";
+        }
+
+        // Highlight active button
+        var activeButton = buttonIndex === 0 ? cityButton : natureButton;
+        var inactiveButton = buttonIndex === 0 ? natureButton : cityButton;
+
+        activeButton.classList.add('active');
+        inactiveButton.classList.remove('active');
     }
     </script>
 </div>
